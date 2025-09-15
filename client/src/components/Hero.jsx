@@ -1,7 +1,8 @@
 import React from "react";
 import { assets } from "../assets/assets";
-
+import { useNavigate } from "react-router-dom";
 const Hero = () => {
+  const navigate=useNavigate();
   return (
     <div
       className="px-4 sm:px-20 xl:px-32 relative inline-flex flex-col w-full justify-center
@@ -22,7 +23,7 @@ const Hero = () => {
       </div>
 
       <div className="flex flex-wrap justify-center gap-4 text-sm max-sm:text-xs">
-        <button className="bg-primary text-white px-10 py-3 rounded-lg 
+        <button onClick={()=> navigate("/ai")} className="bg-primary text-white px-10 py-3 rounded-lg 
         hover:scale-102 active:scale-95 transition cursor-pointer  ">Start creating now</button>
         <button className="bg-white px-10 py-3 rounded-lg border border-gray-300 
         hover:scale-102 active:scale-95 transition cursor-pointer">Watch demo</button>
