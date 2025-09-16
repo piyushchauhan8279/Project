@@ -1,15 +1,15 @@
 import React from "react";
 import { assets } from "../assets/assets";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-import {useClerk,UserButton,useUser} from '@clerk/clerk-react'
+import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const {user} =useUser()
-  const {openSignIn}=useClerk()
+  const { user } = useUser();
+  const { openSignIn } = useClerk();
 
   return (
     <div
@@ -22,7 +22,16 @@ const Navbar = () => {
         className="w-32 sm:w-44 cursor-pointer"
         onClick={() => navigate("/")}
       />
-      {user?<UserButton/>:<button onClick={openSignIn} className="flex items-center gap-2 cursor-pointer text-sm rounded-full bg-primary text-white px-10 py-2.5  ">Get started <ArrowRight className="w-4 h-4 "/></button>}
+      {user ? (
+        <UserButton />
+      ) : (
+        <button
+          onClick={openSignIn}
+          className="flex items-center gap-2 cursor-pointer text-sm rounded-full bg-primary text-white px-10 py-2.5  "
+        >
+          Get started <ArrowRight className="w-4 h-4 " />
+        </button>
+      )}
     </div>
   );
 };
