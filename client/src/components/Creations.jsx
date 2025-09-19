@@ -1,9 +1,13 @@
 import { useState } from "react";
+import Markdown from "react-markdown";
 
 const Creations = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div onClick={()=>setExpanded(!expanded)} className="p-4 border border-gray-200 rounded-lg cursor-pointer bg-white max-w-5xl text-sm">
+    <div
+      onClick={() => setExpanded(!expanded)}
+      className="p-4 border border-gray-200 rounded-lg cursor-pointer bg-white max-w-5xl text-sm"
+    >
       <div className="flex gap-4 justify-between items-center">
         <div>
           <h2>{item.prompt}</h2>
@@ -27,7 +31,9 @@ const Creations = ({ item }) => {
             </div>
           ) : (
             <div className="mt-3 h-full overflow-y-scroll text-sm text-slate-700">
-              {item.content}
+              <div className="reset-tw">
+                <Markdown>{item.content}</Markdown>
+              </div>
             </div>
           )}
         </div>
