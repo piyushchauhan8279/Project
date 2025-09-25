@@ -1,11 +1,55 @@
-import React from 'react'
-
+import { useUser } from "@clerk/clerk-react";
+import { useEffect, useState } from "react";
+import { dummyPublishedCreationData } from "../assets/assets";
+import { Heart } from "lucide-react";
 const Community = () => {
-  return (
-    <div>
-      <h1>Community</h1>
-    </div>
-  )
-}
+  const [creations, setCreations] = useState([]);
+  const { user } = useUser();
 
-export default Community
+  const fetchPublicCreationData = () => {
+    setCreations(dummyPublishedCreationData);
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchPublicCreationData();
+    }
+  }, [user]);
+  return (
+    <div className="flex flex-col flex-1 h-full p-6 gap-4">
+      Creations
+      <div className="bg-white h-full w-full rounded-xl overflow-y-scroll">
+        {creations.map((creations, index) => (
+          <div
+            key={index}
+            className="relative group inline-block pl-3 pt-3 w-full
+          sm:max-w-1/2 lg:max-w-1/3"
+          >
+            <img
+              src={creations.content}
+              alt="content"
+              className="w-full h-full object-cover rounded-lg"
+            />
+            <div className="absolute left-3 right-0 bottom-0 top-0 flex items-end justify-end gap-2  group-hover:justify-between p-3 group-hover:bg-gradient-to-b from-transparent to-black/80 text-white rounded-lg">
+              <p className="text-sm hidden group-hover:block">
+                {creations.prompt}
+              </p>
+              <div className="flex items-center gap-1">
+                <p>{creations.likes.length}</p>
+                <Heart
+                  className={`min-w-5 h-5 hover:scale-110 cursor-pointer ${
+                    creations.likes.includes(user.id)
+                      ? "fill-red-500 text-red-600"
+                      : "text-white"
+                  }`}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Community;

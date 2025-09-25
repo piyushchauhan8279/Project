@@ -1,4 +1,4 @@
-import { Hash, Sparkle } from "lucide-react";
+import { Hash, Sparkles } from "lucide-react";
 import { useState } from "react";
 const BlogTitles = () => {
   const onSubmitHandler = async (e) => {
@@ -30,7 +30,7 @@ const BlogTitles = () => {
         className=" p-4 w-full max-w-lg bg-white border border-gray-200 rounded-lg"
       >
         <div className="flex items-center gap-3 ">
-          <Sparkle className="w-6 text-[#AE37EB]" />
+          <Sparkles className="w-6 text-[#AE37EB]" />
           <h1 className="text-xl font-semibold">AI Title Generator</h1>
         </div>
         <p className="mt-6 text-sm font-semibold">Keyword</p>
