@@ -18,7 +18,7 @@ app.get('/',(req,res)=>{
   res.send('server is live')
 })
 
-app.use(requireAuth())
+// app.use(requireAuth())
 
 app.use('/api/ai',aiRouter)
 
