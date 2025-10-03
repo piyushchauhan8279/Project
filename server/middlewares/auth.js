@@ -1,13 +1,21 @@
 // middleware to check the userid and hasPremiumPlan
 
 import { clerkClient } from "@clerk/express";
+import { use } from "react";
 export const auth = async (req, res, next) => {
   try {
-    console.log('req');
-    
+
     const { has, userId } = await req.auth();
-    const hasPremiumPlan = await has({ plan: 'premium' });
+    if (!userId) {
+      return res.json({
+        success: false,
+        message: "Authentication failed. Invalid or missing token.",
+      });
+    }
+
+    const hasPremiumPlan = await has({ plan: "premium" });
     const user = await clerkClient.users.getUser(userId);
+    
 
     if (!hasPremiumPlan && user.privateMetadata.free_usage) {
       req.free_usage = user.privateMetadata.free_usage;
@@ -19,8 +27,9 @@ export const auth = async (req, res, next) => {
       });
       req.free_usage = 0;
     }
+   
 
-    req.plan = hasPremiumPlan ? 'premium' : 'free';
+    req.plan = hasPremiumPlan ? "premium" : "free";
     next();
   } catch (error) {
     res.json({
