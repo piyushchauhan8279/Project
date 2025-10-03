@@ -1,12 +1,13 @@
 import express from "express"
 import cors from "cors" // cross origin resource sharing 
 import 'dotenv/config'
-
+import connectCloudinary from "./configs/cloudinary.js"
 
 import { clerkMiddleware,requireAuth } from '@clerk/express'
 import aiRouter from "./routes/aiRoutes.js"
 
 const app=express()
+await connectCloudinary()
 
 app.use(cors())
 app.use(express.json())
